@@ -20,6 +20,7 @@ public class ArticlesController {
     private ModelMapper mapper;
     @Autowired
     private ArticlesService articlesService;
+
     @GetMapping
     public ResponseEntity<List<ArticlesDTO>> findAll() {
         List<ArticlesDTO> listDTO = articlesService.findAll().stream().map(x -> mapper.map(x, ArticlesDTO.class)).collect(Collectors.toList());
