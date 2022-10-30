@@ -1,0 +1,10 @@
+
+
+--- INSERT ROLES
+INSERT INTO roles(ID, NAME) VALUES('22', 'USER');
+
+
+
+
+
+
