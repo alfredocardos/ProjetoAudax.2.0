@@ -1,9 +1,6 @@
 package br.com.api.projetoaudax.controller;
 
-import br.com.api.projetoaudax.dto.CreateUserRoleDTO;
 import br.com.api.projetoaudax.dto.UsersDTO;
-import br.com.api.projetoaudax.model.Users;
-import br.com.api.projetoaudax.service.CreateRoleUserService;
 import br.com.api.projetoaudax.service.UsersService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +21,15 @@ public class UsersController {
     private UsersService usersService;
 
     @Autowired
-    private CreateRoleUserService createRoleUserService;
-
-    @Autowired
     private ModelMapper mapper;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UsersDTO> findById(@PathVariable Long id){
+    public ResponseEntity<UsersDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(mapper.map(usersService.findById(id), UsersDTO.class));
     }
 
     @GetMapping(value = "/username/{username}")
-    public ResponseEntity<UsersDTO> findByUsername(@PathVariable String username){
+    public ResponseEntity<UsersDTO> findByUsername(@PathVariable String username) {
         return ResponseEntity.ok().body(mapper.map(usersService.findByName(username), UsersDTO.class));
     }
 
@@ -59,13 +53,9 @@ public class UsersController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UsersDTO> update(@PathVariable Long id, @RequestBody @Valid UsersDTO obj){
+    public ResponseEntity<UsersDTO> update(@PathVariable Long id, @RequestBody @Valid UsersDTO obj) {
         obj.setId(id);
         return ResponseEntity.ok().body(mapper.map(usersService.update(obj), UsersDTO.class));
     }
 
-    @PostMapping("/role")
-    public Users role(@RequestBody CreateUserRoleDTO createUserRoleDTO){
-        return createRoleUserService.execute(createUserRoleDTO);
-    }
 }

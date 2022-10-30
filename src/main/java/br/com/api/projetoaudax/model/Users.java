@@ -37,16 +37,7 @@ public class Users implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<Articles> articles = new ArrayList<>();
-    @ManyToMany
-    private List<Role> roles;
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 
     public Users() {
     }
@@ -59,7 +50,7 @@ public class Users implements Serializable {
         this.password = password;
         this.registeredAt = registeredAt;
         this.articles = articles;
-        this.roles = roles;
+
     }
 
     public Long getId() {
