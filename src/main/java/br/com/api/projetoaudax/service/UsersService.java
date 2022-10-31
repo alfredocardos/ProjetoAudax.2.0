@@ -3,12 +3,13 @@ package br.com.api.projetoaudax.service;
 import br.com.api.projetoaudax.dto.UsersDTO;
 import br.com.api.projetoaudax.model.Users;
 import br.com.api.projetoaudax.repository.UsersRepository;
-import br.com.api.projetoaudax.service.exceptions.DataIntegrityViolationException;
+getArticlesservice.exceptions.DataIntegrityViolationException;
 import br.com.api.projetoaudax.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,8 @@ public class UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
+    private Users users1;
 
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -49,6 +52,9 @@ public class UsersService {
 
     public void delete(Long id) {
         findById(id);
+        if (users1.getArticles != null){
+            throw new DataIntegrityViolationException("O usuario possui artigos criados");
+        }
         usersRepository.deleteById(id);
 
     }
